@@ -1,34 +1,9 @@
 import React, { Component } from "react";
 import TodoForm from "./TodoForm";
-
-const TodoData = [
-  {
-    content: "Apples",
-    id: 1
-  },
-  {
-    content: "Mangoes",
-    id: 2
-  },
-  {
-    content: "Onions",
-    id: 3
-  },
-  {
-    content: "Garlic",
-    id: 4
-  }
-];
+import { connect } from "react-redux";
 
 class TodoList extends Component {
-  state = {
-    items: []
-  };
-  componentDidMount() {
-    this.setState({
-      items: TodoData
-    });
-  }
+  
   addItem = newItem => {
     newItem.id = Math.random();
     let newItems = [...this.state.items, newItem];
@@ -36,12 +11,22 @@ class TodoList extends Component {
       items: newItems
     });
   };
+  deleteItem = itemId => {
+    let items = this.state.items.filter(item => {
+        return (
+            item.id !== itemId
+        )
+    })
+    this.setState({
+        items
+    })
+  }
   render() {
-    const { items } = this.state;
+    const { items } = this.props;
     const itemsList = items ? (
       items.map(item => {
         return (
-          <li className="row" key={item.id}>
+          <li className="row" key={item.id} onClick={() => this.deleteItem(item.id)}>
             <label>
               <input type="checkbox" />
               <span>{item.content}</span>
@@ -65,4 +50,10 @@ class TodoList extends Component {
   }
 }
 
-export default TodoList;
+const mapStateToProps = (state) => {
+  return {
+    items: state.items
+  }
+}
+
+export default connect(mapStateToProps)(TodoList);

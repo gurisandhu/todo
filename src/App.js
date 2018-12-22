@@ -1,6 +1,7 @@
 import React, { Component } from "react";
-import Navbar from './Components/Navbar';
+import Navbar from "./Components/Navbar";
 import TodoList from "./Components/TodoList";
+
 
 class App extends Component {
   render() {
