@@ -12,12 +12,14 @@ class TodoForm extends Component {
   };
   handleSubmit = e => {
     e.preventDefault();
-    this.props.addItem(this.state);
+    this.props.addItem(this.state.content);
     this.setState({
       content: ""
     });
   };
+  
   render() {
+    console.log("Props: ", this.props);
     return (
       <form className="col s12" onSubmit={this.handleSubmit}>
         <div className="input-field">

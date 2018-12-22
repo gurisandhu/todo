@@ -21,9 +21,10 @@ const initialState = {
 const rootReducer = (state = initialState, action) => {
   if (action.type === "ADD_ITEM") {
     const item = action.content;
-    return { ...state.items, item };
+    item.id = Math.random();
+    let items = [...state.items, item];
+    return { ...state, items };
   }
-  console.log(state);
   return state;
 };
 
