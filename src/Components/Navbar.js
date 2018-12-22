@@ -4,9 +4,9 @@ const Navbar = () => {
     return (
         <nav>
           <div className="nav-wrapper">
-            <a href="#" className="brand-logo">
+            <span className="brand-logo">
               Let's do it
-            </a>
+            </span>
             <ul id="nav-mobile" className="right hide-on-med-and-down">
               <li>
                 <a href="sass.html">Link 1</a>
