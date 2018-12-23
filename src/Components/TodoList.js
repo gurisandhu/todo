@@ -3,24 +3,10 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 
 class TodoList extends Component {
-  // addItem = newItem => {
-  //   newItem.id = Math.random();
-  //   let newItems = [...this.state.items, newItem];
-  //   this.setState({
-  //     items: newItems
-  //   });
-  // };
   state = {
     content: ""
   };
-  deleteItem = itemId => {
-    let items = this.state.items.filter(item => {
-      return item.id !== itemId;
-    });
-    this.setState({
-      items
-    });
-  };
+
   handleNewItem = e => {
     this.setState({
       content: e.target.value
@@ -41,7 +27,7 @@ class TodoList extends Component {
           <li
             className="row"
             key={item.id}
-            onClick={() => this.deleteItem(item.id)}
+            onClick={() => this.props.deleteItem(item.id)}
           >
             <label>
               <input type="checkbox" />
@@ -89,6 +75,12 @@ const mapDispatchToProps = dispatch => {
       dispatch({
         type: "ADD_ITEM",
         content
+      });
+    },
+    deleteItem: id => {
+      dispatch({
+        type: "DELETE_ITEM",
+        id
       });
     }
   };
